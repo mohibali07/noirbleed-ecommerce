@@ -479,3 +479,46 @@ footer {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+/* USER AUTHENTICATION FORMS */
+.auth-form {
+    max-width: 400px;
+    margin: 2rem auto;
+    background-color: #1a1a1a;
+    padding: 2.5rem;
+    border: 1px solid #333;
+}
+
+.auth-form h2 {
+    margin-bottom: 2rem;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #000;
+    border: 1px solid #333;
+    color: #E0E0E0;
+    font-size: 1rem;
+}
+
+.auth-form a {
+    color: #E74C3C;
+    text-decoration: none;
+}
+
+.auth-form p {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #999;
+}
