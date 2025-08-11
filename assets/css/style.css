@@ -110,7 +110,7 @@ header .container {
     left: 0;
     text-align: center;
     padding: 20px 0;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--border-color);
     z-index: 999;
 }
 
@@ -130,7 +130,7 @@ header .container {
     color: #fff;
     text-decoration: none;
     font-size: 1.2rem;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--border-color);
 }
 
 /* --- Hero Section --- */
@@ -389,7 +389,7 @@ footer {
 }
 
 .auth-form a {
-    color: #E74C3C;
+    color: var(--primary-color);
     text-decoration: none;
 }
 
