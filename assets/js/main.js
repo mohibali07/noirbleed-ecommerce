@@ -273,24 +273,32 @@ document.addEventListener("DOMContentLoaded", () => {
                     }).join('')}
                 </ul>
                 <p class="order-total">Total: $${cartTotal.toFixed(2)}</p>
-                <button id="pay-now-btn" class="checkout-button">Pay Now</button>
+                <button id="pay-now-btn" class="checkout-button">Place Order</button>
             `;
 
             const payNowBtn = document.getElementById('pay-now-btn');
-            payNowBtn.addEventListener('click', async () => {
-                // This is a front-end-only example of a payment redirect.
-                // For a real application, this should be done on a server.
-                const stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY');
-                const { error } = await stripe.redirectToCheckout({
-                    lineItems: lineItems,
-                    mode: 'payment',
-                    successUrl: `${window.location.origin}/success.html`,
-                    cancelUrl: `${window.location.origin}/cancel.html`,
-                });
+            payNowBtn.addEventListener('click', (event) => {
+                event.preventDefault(); // Default form submission ko rokne ke liye
 
-                if (error) {
-                    console.error('Error:', error);
+                // Form validation (ek simple check)
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const card = document.getElementById('card-number').value;
+
+                if (!name || !email || !card) {
+                    alert('Please fill out all the details.');
+                    return;
                 }
+
+                // Agar form bhara hua hai, toh order process karein
+                // Kyunki yeh Cash on Delivery hai, isme koi online payment process nahi hoga.
+                // Hum seedha success page par redirect karenge.
+                
+                // Sabse zaroori: Order place hone par cart ko empty karein
+                localStorage.removeItem('cart');
+
+                // Order confirmation page par redirect karein
+                window.location.href = 'success.html';
             });
         }
     }
