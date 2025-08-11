@@ -522,3 +522,15 @@ footer {
     margin-top: 1.5rem;
     color: #999;
 }
+
+/* Footer Links */
+footer .footer-links {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+footer .footer-links a {
+    color: #E74C3C;
+    text-decoration: none;
+    padding: 0 5px;
+}
