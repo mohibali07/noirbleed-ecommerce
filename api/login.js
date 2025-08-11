@@ -20,8 +20,13 @@ module.exports = async (req, res) => {
     if (!fs.existsSync(usersFilePath)) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
+    
+    const fileContent = fs.readFileSync(usersFilePath, 'utf-8');
+    if (!fileContent) { // New check
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
 
-    const usersData = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+    const usersData = JSON.parse(fileContent);
     const user = usersData.users.find(u => u.email === email);
 
     if (!user || user.password !== password) {

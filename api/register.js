@@ -17,11 +17,10 @@ module.exports = async (req, res) => {
       return res.status(400).json({ error: 'Email and password are required' });
     }
 
-    // Read the users file
     let usersData = { users: [] };
     if (fs.existsSync(usersFilePath)) {
       const fileContent = fs.readFileSync(usersFilePath, 'utf-8');
-      if (fileContent) {
+      if (fileContent) { // This is the new check
         usersData = JSON.parse(fileContent);
       }
     }
@@ -30,13 +29,11 @@ module.exports = async (req, res) => {
       return res.status(409).json({ error: 'User with this email already exists' });
     }
 
-    // Add new user
     usersData.users.push({
       email,
       password,
     });
 
-    // Write the updated data back to the file
     fs.writeFileSync(usersFilePath, JSON.stringify(usersData, null, 2));
 
     res.status(201).json({ message: 'User registered successfully!' });
