@@ -3,12 +3,14 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = async (req, res) => {
+  // Only allow POST requests
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).end('Method Not Allowed');
   }
 
   try {
+    // Correctly get the email and password from the request body
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -16,13 +18,20 @@ module.exports = async (req, res) => {
     }
 
     const usersFilePath = path.join(process.cwd(), 'users.json');
-    let usersData = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+    let usersData;
+    
+    // Check if the users.json file exists, and create it if it doesn't
+    if (fs.existsSync(usersFilePath)) {
+      usersData = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+    } else {
+      usersData = { users: [] };
+    }
 
     if (usersData.users.find(user => user.email === email)) {
       return res.status(409).json({ error: 'User with this email already exists' });
     }
 
-    // Password ko plain text mein store kar rahe hain (warning: not recommended)
+    // Store password without hashing
     usersData.users.push({
       email,
       password: password
