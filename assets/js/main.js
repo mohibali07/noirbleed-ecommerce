@@ -309,8 +309,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (menuToggle && mobileNav) {
         menuToggle.addEventListener('click', () => {
             mobileNav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
         });
-    }
 });
 
 // --- Login and Register Form Logic ---
